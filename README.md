@@ -9,7 +9,7 @@ A collection of Python programs demonstrating various concepts such as games, li
 |----------------|-------------------|
 | 🎮 **Games**        | [Guess the Number](#guess-the-number), [Stone Paper Scissors](#stone-paper-scissors), [KBC Game](#kbc-game) |
 | 📚 **Library**        | [Library Management System](#library-management-system) |
-| 🧠 **Mini Projects** | [Secret Language](#secret-language) |
+| 🧠 **Mini Projects** | [Secret Language](#secret-language), [Password Generator](#password-generator) |
 | 🛠️ **Basic Concepts** | Loops, Conditionals, Functions, etc. |
 
 Each script is written in pure Python and can be executed directly from the terminal or any Python IDE.
@@ -201,7 +201,73 @@ elif task.lower() == "decoding":
 
 ---
 
-## 🛠️ Requirements
+## 🧩 **Password Generator**
+
+### Description:
+A Python program that generates strong passwords with uppercase and lowercase letters, numbers, and special characters. The password length can be customized, and the program ensures randomness and strength.
+
+### Code:
+
+```python
+from string import *
+from random import randint, sample
+
+while True:
+    try:
+        num = int(input("Enter The Size of The Password     : "))
+        special_char = "!@#$%^&*()-_=+"  # Avoid using punctuation for broader compatibility
+
+        if num < 8:
+            print("⚠️ For a Strong Password, Minimum 8 Characters Recommended
+")
+            continue
+
+        unq_num = sample(range(0, num), num)  # unique shuffled indexes
+
+        def get_unqiue_number():
+            return unq_num.pop() if unq_num else None
+
+        password = []
+
+        # Fill with uppercase and lowercase letters
+        for i in range(0, num - int(num / 2) - 2):
+            password.insert((2 * i + 1), ascii_lowercase[randint(0, 25)])
+            password.insert(2 * i, ascii_uppercase[randint(0, 25)])
+
+        # Fill with numbers
+        for j in range(num - int(num / 2) + 3, num):
+            password.insert(2 * j + 1, str(randint(0, 4)))  # convert to string
+            password.insert(2 * j, str(randint(5, 9)))      # convert to string
+
+        # Add one special character
+        for k in range(num - 1, num):
+            password.insert(k, special_char[randint(0, len(special_char) - 1)])
+
+        # Build final password using unique indexes
+        final_password_list = []
+        for l in range(0, num):
+            a = get_unqiue_number()
+            if a is not None and a < len(password):
+                final_password_list.insert(l, str(password[a]))
+
+        print(f"
+✅ Your Strong Password is         : {''.join(final_password_list)}
+")
+
+    except Exception as e:
+        print("
+🚫 ENTER VALID INPUT
+")
+```
+
+### How to Run:
+1. Download the Python script (`password_generator.py`).
+2. Enter the desired password length when prompted.
+3. A strong password will be generated and displayed.
+
+---
+
+## 🧩 Requirements
 
 Most projects don't require external libraries.  
 Just make sure you have **Python 3.x** installed.
