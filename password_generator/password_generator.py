@@ -20,20 +20,19 @@ while True:
                 password.insert((2*i+1),ascii_lowercase[randint(0,25)])
                 password.insert(2*i,ascii_uppercase[randint(0,25)])
             for j in range(num-int(num/2)+3,num):
-                password.insert(2*j+1,randint(0,4))
-                password.insert(2*j,randint(5,9))   
+                password.insert(2*j+1,str(randint(0,4)))
+                password.insert(2*j,str(randint(5,9)))   
 
             for k in range(num-1,num):
-                password.insert(k,special_char[randint(0,len(special_char))])
+                password.insert(k,special_char[randint(0,len(special_char)-1)])
             final_password_list = []
-            for l in range(0,num+1):
+            for l in range(0,num):
                 a=get_unqiue_number()
-                if a==None:
-                    break
-                else:
+                if a!=None and a<len(password):
                     final_password_list.insert(l,str(password[int(a)]))
             print(f"Your Strong Password is            :{''.join(final_password_list)}")
     except Exception as e:
-        print('''
+        print(f'''
               ENTER VALID INPUT
               ''')
+
