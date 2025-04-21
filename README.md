@@ -278,7 +278,79 @@ Run any script using:
 python <filename>.py
 ```
 
+# 🔳 QR Code Generator
+
+A simple Python script that lets you generate QR codes from any URL or text and save them as PNG files.
+
+## 📦 Features
+
+- Input any URL or text
+- Automatically appends `.png` extension if not provided
+- Clean black-and-white QR code image generation
+
+## ▶️ How to Run
+
+1. Install the required package:
+```bash
+pip install qrcode[pil]
+```
+
+2. Run the script:
+```bash
+python QR_code_generator.py
+```
+
+3. Follow the prompts to enter the URL/text and file name.
+
+## 🧠 Example
+
+```bash
+Enter the URL    : https://github.com/
+Enter the file name   : github_qr
+QR code is saved in github_qr.png
+```
+
+## 💡 Dependencies
+
+- `qrcode` for QR code generation
+- `pillow` (automatically installed with `qrcode[pil]`)
+
+## 🧩 About the Script
+
+This Python script uses the `qrcode` library to generate QR codes. It takes a URL or any text input from the user, creates a corresponding QR code, and saves it as a PNG image. If the filename provided by the user does not end with `.png`, the script automatically appends it.
+
+### Example Usage
+
+```python
+import qrcode
+
+data = input("Enter the URL    :").strip()
+filename = input("Enter the file name   :").strip()
+
+qr = qrcode.QRCode(box_size=10, border=4)
+qr.add_data(data)
+image = qr.make_image(fill_color="black", back_color="white")
+if not filename.lower().endswith(".png"):
+    filename += ".png"
+image.save(filename)
+
+print(f"QR code is saved in {filename}")
+```
+
 ---
+
+## 💻 Requirements
+
+- **Python 3.x**
+- **qrcode** library
+- **pillow** library (for image processing)
+
+To install all dependencies, run:
+
+```bash
+pip install qrcode[pil]
+```
+
 
 ## 🧠 What I Learned
 
@@ -288,6 +360,9 @@ python <filename>.py
 - Writing clean, readable code
 - File handling (reading and writing to text files)
 - Game development and basic algorithms
+- Python basics: working with libraries, user input, and file handling
+- How to generate QR codes with Python
+- Error handling and extension management in file names
 
 ---
 
